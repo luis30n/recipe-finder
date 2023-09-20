@@ -51,8 +51,13 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'database_cleaner-active_record', '~> 2.1'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails', '~> 6.2'
+  gem 'pry', '~> 0.14.2'
+  gem 'rspec', '~> 3.12'
+  gem 'rspec-rails', '~> 6.0'
+  gem 'rubocop', '~> 1.56'
 end
 
 group :development do
@@ -65,5 +70,3 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-
-gem 'rubocop', '~> 1.56'
