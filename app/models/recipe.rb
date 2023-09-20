@@ -5,7 +5,7 @@ class Recipe < ApplicationRecord
   pg_search_scope(
     :with_any_ingredients,
     against: :ingredients,
-    using: { tsearch: { any_word: true, dictionary: 'english' } },
+    using: { tsearch: { any_word: true, dictionary: 'english', tsvector_column: 'ingredients_tsv' } },
     order_within_rank: 'recipes.rating_average DESC'
   )
   self.per_page = 30
