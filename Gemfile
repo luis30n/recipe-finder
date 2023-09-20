@@ -70,3 +70,7 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
+gem 'pg_search', '~> 2.3'
+
+gem 'will_paginate', '~> 4.0'

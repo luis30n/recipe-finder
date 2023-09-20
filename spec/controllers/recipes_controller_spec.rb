@@ -27,5 +27,19 @@ RSpec.describe RecipesController, type: :request do
       recipes_json = JSON.parse(response.body)
       expect(recipes_json.pluck('id')).to eq(ordered_recipe_ids)
     end
+
+    context 'when filtering by ingredients' do
+      let(:params) { { ingredients: 'tomato, spaguetti' } }
+      let!(:no_ingredients_match_recipe) { create(:recipe, ingredients: %w[fish pepper]) }
+      let!(:two_ingredients_match_recipe) { create(:recipe, ingredients: %w[cream tomato spaguetti]) }
+      let!(:one_ingredient_match_recipe) { create(:recipe, ingredients: %w[tomatoe eggs potatoes]) }
+      let!(:ordered_recipe_ids) { [two_ingredients_match_recipe.id, one_ingredient_match_recipe.id] }
+
+      it 'orders the recipes based on ingredients match' do
+        get_index
+        recipes_json = JSON.parse(response.body)
+        expect(recipes_json.pluck('id')).to eq(ordered_recipe_ids)
+      end
+    end
   end
 end
