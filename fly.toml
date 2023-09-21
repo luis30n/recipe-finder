@@ -1,0 +1,22 @@
+# fly.toml app configuration file generated for recipe-find3r on 2023-09-20T22:40:09+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "recipe-find3r"
+primary_region = "mad"
+console_command = "/rails/bin/rails console"
+
+[build]
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+[[statics]]
+  guest_path = "/rails/public"
+  url_prefix = "/"
