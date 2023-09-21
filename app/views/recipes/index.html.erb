@@ -1,0 +1,40 @@
+<!-- app/views/recipes/index.html.erb -->
+<header class="header">
+  <div class="header__title--container">
+    <img class="header__title--img" src="<%= asset_path('header-icon.png') %>" >
+    <h1 class="header__title">
+      RecipeFinder
+    </h1>
+  </div>
+  <div>
+    <%= form_tag(recipes_path, method: :get, class: "recipe-search") do %>
+      <%= text_field_tag(:ingredients, params[:ingredients], placeholder: "Search by ingredients...", class: "input") %>
+      <%= submit_tag("Search", class: "search-button") %>
+    <% end %>
+  </div>
+</header>
+
+<div class="recipe-list">
+  <% @recipes.each do |recipe| %>
+    <div class="recipe--container">
+      <div class="recipe">
+        <div class="recipe--front">
+          <h2 class="recipe--title"><%= recipe.title %></h2>
+          <img class="recipe--image" src="<%= recipe.image_url %>" alt="<%= recipe.title %>">
+          <p class="recipe--author"><%= recipe.author %></p>
+          <p class="recipe--rating"><%= recipe.rating_average %></p>
+        </div>
+        <div class="recipe--back">
+          <h3>Ingredients:</h3>
+          <ul>
+            <% recipe.ingredients.each do |ingredient| %>
+              <li><%= ingredient %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= will_paginate @recipes %>
